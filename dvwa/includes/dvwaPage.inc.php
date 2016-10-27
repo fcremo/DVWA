@@ -17,7 +17,7 @@ if( !isset( $html ) ) {
 }
 
 // Valid security levels
-$security_levels = array('low', 'medium', 'high', 'impossible');
+$security_levels = array('low', 'medium', 'high', 'impossible', 'challenge');
 if( !isset( $_COOKIE[ 'security' ] ) || !in_array( $_COOKIE[ 'security' ], $security_levels ) ) {
 	// Set security cookie to impossible if no cookie exists
 	if( in_array( $_DVWA[ 'default_security_level' ], $security_levels) ) {
@@ -35,7 +35,7 @@ if( !isset( $_COOKIE[ 'security' ] ) || !in_array( $_COOKIE[ 'security' ], $secu
 
 // DVWA version
 function dvwaVersionGet() {
-	return '1.10 *Development*';
+	return '1.10 *Custom ToH*';
 }
 
 // DVWA release date
@@ -202,6 +202,9 @@ function dvwaHtmlEcho( $pPage ) {
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'sqli_blind', 'name' => 'SQL Injection (Blind)', 'url' => 'vulnerabilities/sqli_blind/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'xss_r', 'name' => 'XSS (Reflected)', 'url' => 'vulnerabilities/xss_r/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'xss_s', 'name' => 'XSS (Stored)', 'url' => 'vulnerabilities/xss_s/' );
+		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'sqli_challenge', 'name' => 'SQLI Challenge', 'url' => 'vulnerabilities/sqli_challenge/' );
+		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'rfi_challenge', 'name' => 'RFI challenge', 'url' => 'vulnerabilities/rfi_challenge/' );
+		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'troll_challenge', 'name' => 'Troll Challenge', 'url' => 'vulnerabilities/troll_challenge/' );
 	}
 
 	$menuBlocks[ 'meta' ] = array();
@@ -240,6 +243,9 @@ function dvwaHtmlEcho( $pPage ) {
 		case 'high':
 			$securityLevelHtml = 'high';
 			break;
+        case 'challenge':
+            $securityLevelHtml = 'challenge';
+            break;
 		default:
 			$securityLevelHtml = 'impossible';
 			break;
@@ -473,7 +479,7 @@ function dvwaDatabaseConnect() {
 	elseif( $DBMS == 'PGSQL' ) {
 		//$dbconn = pg_connect("host={$_DVWA[ 'db_server' ]} dbname={$_DVWA[ 'db_database' ]} user={$_DVWA[ 'db_user' ]} password={$_DVWA[ 'db_password' ])}"
 		//or die( $DBMS_connError );
-		dvwaMessagePush( 'PostgreSQL is not yet fully supported.' );
+		dvwaMessagePush( 'PostgreSQL is not supported.' );
 		dvwaPageReload();
 	}
 	else {
