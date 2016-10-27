@@ -60,6 +60,23 @@ if( !mysqli_query($GLOBALS["___mysqli_ston"],  $insert ) ) {
 dvwaMessagePush( "Data inserted into 'users' table." );
 
 
+$create_tb_flag = "CREATE TABLE flag (flag varchar(32));";
+if( !mysqli_query($GLOBALS["___mysqli_ston"],  $create_tb_flag ) ) {
+	dvwaMessagePush( "Table could not be created<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
+	dvwaPageReload();
+}
+dvwaMessagePush( "'flag' table was created." );
+
+
+// Insert flag
+// Get the base directory for the avatar media...
+$insert = "INSERT INTO flag VALUES ('{WELLDONELEETHAXOR}');";
+if( !mysqli_query($GLOBALS["___mysqli_ston"],  $insert ) ) {
+	dvwaMessagePush( "Data could not be inserted into 'flag' table<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
+	dvwaPageReload();
+}
+dvwaMessagePush( "Data inserted into 'flag' table." );
+
 // Create guestbook table
 $create_tb_guestbook = "CREATE TABLE guestbook (comment_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT, comment varchar(300), name varchar(100), PRIMARY KEY (comment_id));";
 if( !mysqli_query($GLOBALS["___mysqli_ston"],  $create_tb_guestbook ) ) {
