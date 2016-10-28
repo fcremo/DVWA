@@ -12,10 +12,10 @@ $DBMS = 'MySQL';
 #   WARNING: The database specified under db_database WILL BE ENTIRELY DELETED during setup.
 #   Please use a database dedicated to DVWA.
 $_DVWA = array();
-$_DVWA[ 'db_server' ]   = ':DBSERVER:';
-$_DVWA[ 'db_database' ] = ':DBDATABASE:';
-$_DVWA[ 'db_user' ]     = ':DBUSER:';
-$_DVWA[ 'db_password' ] = ':DBPASSWORD:';
+$_DVWA[ 'db_server' ]   = 'localhost';
+$_DVWA[ 'db_database' ] = 'dvwa';
+$_DVWA[ 'db_user' ]     = 'dvwa';
+$_DVWA[ 'db_password' ] = '';
 
 # Only used with PostgreSQL/PGSQL database selection.
 $_DVWA[ 'db_port '] = '5432';

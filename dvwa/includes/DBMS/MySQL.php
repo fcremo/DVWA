@@ -33,7 +33,7 @@ if( !@((bool)mysqli_query($GLOBALS["___mysqli_ston"], "USE " . $_DVWA[ 'db_datab
 	dvwaPageReload();
 }
 
-$create_tb = "CREATE TABLE users (user_id int(6),first_name varchar(15),last_name varchar(15), user varchar(15), password varchar(32),avatar varchar(70), last_login TIMESTAMP, failed_login INT(3), PRIMARY KEY (user_id));";
+$create_tb = "CREATE TABLE users (user_id int(6),first_name varchar(15),last_name varchar(15), user varchar(15), password varchar(32),avatar varchar(70), last_login TIMESTAMP, failed_login INT(3), credit INT(3) default 0, PRIMARY KEY (user_id));";
 if( !mysqli_query($GLOBALS["___mysqli_ston"],  $create_tb ) ) {
 	dvwaMessagePush( "Table could not be created<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
 	dvwaPageReload();
@@ -48,11 +48,11 @@ $stripPos = strpos( $baseUrl, 'setup.php' );
 $baseUrl  = substr( $baseUrl, 0, $stripPos ) . 'hackable/users/';
 
 $insert = "INSERT INTO users VALUES
-	('1','admin','admin','admin',MD5('password'),'{$baseUrl}admin.jpg', NOW(), '0'),
-	('2','Gordon','Brown','gordonb',MD5('abc123'),'{$baseUrl}gordonb.jpg', NOW(), '0'),
-	('3','Hack','Me','1337',MD5('charley'),'{$baseUrl}1337.jpg', NOW(), '0'),
-	('4','Pablo','Picasso','pablo',MD5('letmein'),'{$baseUrl}pablo.jpg', NOW(), '0'),
-	('5','Bob','Smith','smithy',MD5('password'),'{$baseUrl}smithy.jpg', NOW(), '0');";
+	('1','admin','admin','admin',MD5('password'),'{$baseUrl}admin.jpg', NOW(), '0', 0),
+	('2','Gordon','Brown','gordonb',MD5('abc123'),'{$baseUrl}gordonb.jpg', NOW(), '0', 0),
+	('3','Hack','Me','1337',MD5('charley'),'{$baseUrl}1337.jpg', NOW(), '0', 0),
+	('4','Pablo','Picasso','pablo',MD5('letmein'),'{$baseUrl}pablo.jpg', NOW(), '0', 0),
+	('5','Bob','Smith','smithy',MD5('password'),'{$baseUrl}smithy.jpg', NOW(), '0', 0);";
 if( !mysqli_query($GLOBALS["___mysqli_ston"],  $insert ) ) {
 	dvwaMessagePush( "Data could not be inserted into 'users' table<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
 	dvwaPageReload();
@@ -60,6 +60,30 @@ if( !mysqli_query($GLOBALS["___mysqli_ston"],  $insert ) ) {
 dvwaMessagePush( "Data inserted into 'users' table." );
 
 
+// Create coupons table
+$create_tb_coupons = "CREATE TABLE coupons (code varchar(32) primary key, used INT(1));";
+if( !mysqli_query($GLOBALS["___mysqli_ston"],  $create_tb_coupons ) ) {
+	dvwaMessagePush( "Table could not be created<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
+	dvwaPageReload();
+}
+dvwaMessagePush( "'coupons' table was created." );
+
+// Insert coupons
+$insert = "INSERT INTO coupons VALUES ";
+for($i=1; $i<50000; $i++){
+    $insert .= "('$i', 1),";
+}
+$insert .= "('SPECIAL', 0);";
+
+if( !mysqli_query($GLOBALS["___mysqli_ston"],  $insert ) ) {
+    dvwaMessagePush( "Data could not be inserted into 'coupons' table<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
+    dvwaPageReload();
+}
+
+dvwaMessagePush( "Data inserted into 'coupons' table." );
+
+
+// Create flag table
 $create_tb_flag = "CREATE TABLE flag (flag varchar(32));";
 if( !mysqli_query($GLOBALS["___mysqli_ston"],  $create_tb_flag ) ) {
 	dvwaMessagePush( "Table could not be created<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
@@ -69,13 +93,13 @@ dvwaMessagePush( "'flag' table was created." );
 
 
 // Insert flag
-// Get the base directory for the avatar media...
 $insert = "INSERT INTO flag VALUES ('{WELLDONELEETHAXOR}');";
 if( !mysqli_query($GLOBALS["___mysqli_ston"],  $insert ) ) {
 	dvwaMessagePush( "Data could not be inserted into 'flag' table<br />SQL: " . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) );
 	dvwaPageReload();
 }
 dvwaMessagePush( "Data inserted into 'flag' table." );
+
 
 // Create guestbook table
 $create_tb_guestbook = "CREATE TABLE guestbook (comment_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT, comment varchar(300), name varchar(100), PRIMARY KEY (comment_id));";

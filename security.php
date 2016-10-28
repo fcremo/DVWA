@@ -25,6 +25,9 @@ if( isset( $_POST['seclev_submit'] ) ) {
 		case 'high':
 			$securityLevel = 'high';
 			break;
+        case 'challenge':
+            $securityLevel = 'challenge';
+            break;
 		default:
 			$securityLevel = 'impossible';
 			break;
@@ -52,7 +55,7 @@ if( isset( $_GET['phpids'] ) ) {
 
 $securityOptionsHtml = '';
 $securityLevelHtml   = '';
-foreach( array( 'low', 'medium', 'high', 'impossible' ) as $securityLevel ) {
+foreach( array( 'low', 'medium', 'high', 'challenge', 'impossible' ) as $securityLevel ) {
 	$selected = '';
 	if( $securityLevel == dvwaSecurityLevelGet() ) {
 		$selected = ' selected="selected"';

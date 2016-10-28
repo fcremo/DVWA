@@ -205,6 +205,7 @@ function dvwaHtmlEcho( $pPage ) {
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'sqli_challenge', 'name' => 'SQLI Challenge', 'url' => 'vulnerabilities/sqli_challenge/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'rfi_challenge', 'name' => 'RFI challenge', 'url' => 'vulnerabilities/rfi_challenge/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'troll_challenge', 'name' => 'Troll Challenge', 'url' => 'vulnerabilities/troll_challenge/' );
+		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'timing_challenge', 'name' => 'Timing attack Challenge', 'url' => 'vulnerabilities/timing_challenge/' );
 	}
 
 	$menuBlocks[ 'meta' ] = array();

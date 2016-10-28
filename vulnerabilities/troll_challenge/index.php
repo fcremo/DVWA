@@ -14,14 +14,9 @@ $page[ 'source_button' ] = 'troll_challenge';
 dvwaDatabaseConnect();
 
 $method            = 'GET';
-$vulnerabilityFile = '';
-switch( $_COOKIE[ 'security' ] ) {
-    default:
-        $vulnerabilityFile = 'challenge.php';
-        break;    
-}
+$vulnerabilityFile = 'challenge.php';
 
-require_once DVWA_WEB_PAGE_TO_ROOT . "vulnerabilities/sqli_challenge/source/{$vulnerabilityFile}";
+require_once DVWA_WEB_PAGE_TO_ROOT . "vulnerabilities/troll_challenge/source/{$vulnerabilityFile}";
 
 $page[ 'body' ] .= "
 <div class=\"body_padded\">

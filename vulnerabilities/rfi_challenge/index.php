@@ -20,16 +20,17 @@ switch( $_COOKIE[ 'security' ] ) {
 		break;
 }
 
-require_once DVWA_WEB_PAGE_TO_ROOT . "vulnerabilities/fi/source/{$vulnerabilityFile}";
+require_once DVWA_WEB_PAGE_TO_ROOT . "vulnerabilities/rfi_challenge/source/{$vulnerabilityFile}";
 
 // if( count( $_GET ) )
-if( isset( $file ) )
-	include( $file );
+if(!empty($file)){
+    include($file);
+}
 else {
-	header( 'Location:?page=include.php' );
+	header('Location: ?page=include.php');
 	exit;
 }
 
-dvwaHtmlEcho( $page );
+dvwaHtmlEcho($page);
 
 ?>

@@ -1,6 +1,7 @@
 <?php
 
 // The page we wish to display
+
 $file = $_GET[ 'page' ];
 
 function endswith($haystack, $needle){
@@ -13,7 +14,7 @@ function endswith($haystack, $needle){
 }
 
 
-if(!endswith($file, ".php")){
+if(!endswith($file, ".php") && !empty($file)){
     $file = $file . ".php";
 }
 
