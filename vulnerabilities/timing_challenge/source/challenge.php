@@ -8,6 +8,7 @@ if( isset( $_GET['Submit'] ) ) {
         mysqli_query($GLOBALS["___mysqli_ston"], $query) or die("<pre>Something went wrong.</pre><br>Query: $query");
 
     } else {
+
         $coupon = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['coupon']);
 
         $query  = "SELECT * FROM coupons";
@@ -27,6 +28,8 @@ if( isset( $_GET['Submit'] ) ) {
                 break;
             }
         }
+
+        var_dump($used);
 
         if($used){
             $html .= "Non existent or already used coupon!";

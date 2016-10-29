@@ -26,6 +26,10 @@ $impsrc = @file_get_contents("./{$id}/source/impossible.php");
 $impsrc = str_replace( array( '$html .=' ), array( 'echo' ), $impsrc);
 $impsrc = highlight_string( $impsrc, true );
 
+$chalsrc = @file_get_contents("./{$id}/source/challenge.php");
+$chalsrc = str_replace( array( '$html .=' ), array( 'echo' ), $chalsrc);
+$chalsrc = highlight_string( $chalsrc, true );
+
 if( $id == 'fi' ) {
 	$vuln = 'File Inclusion';
 }
@@ -52,6 +56,22 @@ elseif( $id == 'xss_r' ) {
 }
 elseif( $id == 'xss_s' ) {
 	$vuln = 'Stored XSS';
+}
+elseif( $id == "sqli_challenge" ){
+	$vuln = "SQL Injection challenge";
+	$security = "challenge";
+}
+elseif( $id == "troll_challenge" ){
+	$vuln = "PHP Troll challenge";
+	$security = "challenge";
+}
+elseif( $id == "rfi_challenge" ){
+	$vuln = "RFI challenge";
+	$security = "challenge";
+}
+elseif( $id == "timing_challenge" ){
+	$vuln = "Timing attack challenge";
+	$security = "challenge";
 }
 
 $page[ 'body' ] .= "
@@ -89,7 +109,16 @@ $page[ 'body' ] .= "
 			<td><div id=\"code\">{$lowsrc}</div></td>
 		</tr>
 	</table>
-	<br /> <br />
+	<br /> 
+	
+	<h3>Challenge {$vuln} Source</h3>
+	<table width='100%' bgcolor='white' style=\"border:2px #C0C0C0 solid\">
+		<tr>
+			<td ><div id = \"code\" >{$chalsrc}</div ></td >
+		</tr >
+	</table >
+	<br />
+	<br />
 
 	<form>
 		<input type=\"button\" value=\"<-- Back\" onClick=\"history.go(-1);return true;\">

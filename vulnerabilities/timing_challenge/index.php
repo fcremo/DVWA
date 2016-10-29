@@ -21,6 +21,7 @@ require_once DVWA_WEB_PAGE_TO_ROOT . "vulnerabilities/timing_challenge/source/{$
 $page[ 'body' ] .= "
 <div class=\"body_padded\">
 	<h1>Challenge: Timing attack</h1>
+	<p>Warning: this challenge may not work (e.g. I'm still trying to figure out if the race condition is exploitable)</p>
 
     <div class=\"vulnerable_code_area\">{$html}	</div>
 

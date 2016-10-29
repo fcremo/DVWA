@@ -39,17 +39,21 @@ elseif( $id == 'xss_r' ) {
 elseif( $id == 'captcha' ) {
 	$vuln = 'Insecure CAPTCHA';
 }
-elseif( $if == "sqli_challenge" ){
+elseif( $id == "sqli_challenge" ){
     $vuln = "SQL Injection challenge";
     $security = "challenge";
 }
-elseif( $if == "troll_challenge" ){
+elseif( $id == "troll_challenge" ){
     $vuln = "PHP Troll challenge";
     $security = "challenge";
 }
-elseif( $if == "rfi_challenge" ){
+elseif( $id == "rfi_challenge" ){
     $vuln = "RFI challenge";
     $security = "challenge";
+}
+elseif( $id == "timing_challenge" ){
+	$vuln = "Timing attack challenge";
+	$security = "challenge";
 }
 else {
 	$vuln = 'XSS (Stored)';
